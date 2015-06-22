@@ -13,6 +13,7 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
  */
 package org.netpreserve.openwayback.accesscontrol.staticmap;
 
@@ -31,11 +32,36 @@ import org.archive.wayback.surt.SURTTokenizer;
 import org.archive.wayback.util.flatfile.FlatFile;
 import org.archive.wayback.util.url.AggressiveUrlCanonicalizer;
 
+/* (non-Javadoc)
+ * (add-hook 'after-save-hook 'mvn-javadoc)
+ * (add-hook 'after-save-hook 'mvn-install)
+ */
+
 /**
+ * Factory of a filter that blocks everything except urls listed in a file.
+ * <p>
+ * Example of a Spring configuration
+ * <pre>
+ * {@code
+ *<bean id="whitelisted-cases" class="org.archive.wayback.accesscontrol.staticmap.StaticMapWhitelistFilterFactory" >
+ *    <property name="file" value="/mnt/wayback/whitelisted_urls.txt" />
+ *    <property name="checkInterval" value="600000" />
+ * </bean>
  *
+ * <bean id="excluder-public" class="org.archive.wayback.accesscontrol.CompositeExclusionFilterFactory">
+ *    <property name="factories">
+ *       <list>
+ *         <ref bean="whitelisted-cases" />
+ *         <ref bean="excluder-special-cases" />
+ *       </list>
+ *    </property>
+ *</bean>
+ * }
+ * </pre>
  *
  * @author Jan Stavel <stavel.jan at gmail.com>
- * @version $Date$, $Revision$
+ * @version 2015-06-22, 0.1.0
+ *
  */
 public class StaticMapWhitelistFilterFactory implements ExclusionFilterFactory {
 	private static final Logger LOGGER =
