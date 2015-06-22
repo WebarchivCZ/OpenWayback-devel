@@ -31,11 +31,13 @@ import org.archive.wayback.surt.SURTTokenizer;
 import org.archive.wayback.util.ObjectFilter;
 
 /**
- *
- *
  * @author Jan Stavel <stavel.jan at gmail.com>
- * @version $Date$, $Revision$
+ * @version 2015-06-22, 0.1.0
+ *
+ * (add-hook 'after-save-hook 'mvn-javadoc)
+ * (add-hook 'after-save-hook 'mvn-install)
  */
+
 public class StaticMapWhitelistFilter extends ExclusionFilter {
 	private static final Logger LOGGER = Logger.getLogger(
 			StaticMapWhitelistFilter.class.getName());
