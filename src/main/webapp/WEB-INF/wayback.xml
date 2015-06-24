@@ -131,6 +131,12 @@
   </bean>
 -->
 
+<!-- Webarchiv.cz | Whitelist class for banning every URL and enabling URLs from txt" -->
+<bean id="whitelist" class="org.netpreserve.openwayback.accesscontrol.staticmap.StaticMapWhitelistFilterFactory">
+	<property name="file" value="${wayback.basedir}/url-filters/whitelist.txt" />
+	<property name="checkInterval" value="60000" />
+</bean>
+
 <!--
   The 'excluder-factory-composite' bean creates a single exclusionFactory 
   which restricts from both a static list of URLs, and also by live web 
@@ -172,6 +178,7 @@
 
   <bean name="standardaccesspoint" class="org.archive.wayback.webapp.AccessPoint">
     <property name="accessPointPath" value="${wayback.url.prefix}/wayback/"/>
+	<property name="exclusionFactory" ref="whitelist" />
     <property name="internalPort" value="${wayback.url.port}"/>
     <property name="serveStatic" value="true" />
     <property name="bounceToReplayPrefix" value="false" />
