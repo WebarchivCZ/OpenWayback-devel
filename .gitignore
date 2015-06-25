@@ -1,3 +1,4 @@
 target
 *~
 macros.el
+deploy.sh
