@@ -124,12 +124,12 @@
      "http://www.archive.org/ima" will block anything starting with that string
      from being returned from the index.
 -->
-<!--
-  <bean id="excluder-factory-static" class="org.archive.wayback.accesscontrol.staticmap.StaticMapExclusionFilterFactory">
-    <property name="file" value="/var/tmp/os-cdx/exclusion-2008-09-22-cleaned.txt" />
+
+  <bean id="blacklist" class="org.archive.wayback.accesscontrol.staticmap.StaticMapExclusionFilterFactory">
+    <property name="file" value="${wayback.basedir}/url-filters/blacklist.txt" />
     <property name="checkInterval" value="600000" />
   </bean>
--->
+
 
 <!-- Webarchiv.cz | Whitelist class for banning every URL and enabling URLs from txt" -->
 <bean id="whitelist" class="org.netpreserve.openwayback.accesscontrol.staticmap.StaticMapWhitelistFilterFactory">
@@ -243,6 +243,37 @@
     <property name="exclusionFactory" ref="excluder-factory-static" />
 -->
 
+  </bean>
+<!-- Webarchiv.cz | Testing restricted Access -->
+  <bean name="restricted-access" class="org.archive.wayback.webapp.AccessPoint">
+    <property name="accessPointPath" value="${wayback.url.prefix}/restricted/"/>
+    <property name="internalPort" value="${wayback.url.port}"/>
+    <property name="serveStatic" value="true" />
+    <property name="bounceToReplayPrefix" value="true" />
+    <property name="bounceToQueryPrefix" value="true" />
+    <property name="enableMemento" value="true" />
+
+    <property name="replay" ref="archivalurlreplay" />
+    <property name="collection" ref="localbdbcollection" />
+    <property name="exclusionFactory" ref="blacklist" />
+    <property name="replayPrefix" value="${wayback.url.prefix}/wayback/" />
+    <property name="queryPrefix" value="${wayback.url.prefix}/wayback/" />
+    <property name="staticPrefix" value="${wayback.url.prefix}/wayback/" />
+    <property name="query">
+      <bean class="org.archive.wayback.query.Renderer">
+        <property name="captureJsp" value="/WEB-INF/query/BubbleCalendar.jsp" />
+      </bean>
+    </property>
+    <property name="uriConverter">
+      <bean class="org.archive.wayback.archivalurl.ArchivalUrlResultURIConverter">
+        <property name="replayURIPrefix" value="${wayback.url.prefix}/restricted/"/>
+      </bean>
+    </property>
+    <property name="parser">
+      <bean class="org.archive.wayback.archivalurl.ArchivalUrlRequestParser">
+        <property name="maxRecords" value="10000" />
+      </bean>
+    </property>
   </bean>
 
 
