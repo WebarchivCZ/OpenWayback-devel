@@ -142,16 +142,16 @@
   which restricts from both a static list of URLs, and also by live web 
   robots.txt documents. 
 -->
-<!--
-  <bean id="excluder-factory-composite" class="org.archive.wayback.accesscontrol.CompositeExclusionFilterFactory">
+
+  <bean id="url-filters" class="org.archive.wayback.accesscontrol.CompositeExclusionFilterFactory">
     <property name="factories">
       <list>
-        <ref bean="excluder-factory-static" />
-        <ref bean="excluder-factory-robot" />
+        <ref bean="whitelist" />
+        <ref bean="blacklist" />
       </list>
     </property>
   </bean>
--->
+
 
 <!--
     This is the only AccessPoint defined by default within this wayback.xml
@@ -249,16 +249,16 @@
     <property name="accessPointPath" value="${wayback.url.prefix}/restricted/"/>
     <property name="internalPort" value="${wayback.url.port}"/>
     <property name="serveStatic" value="true" />
-    <property name="bounceToReplayPrefix" value="true" />
-    <property name="bounceToQueryPrefix" value="true" />
+    <property name="bounceToReplayPrefix" value="false" />
+    <property name="bounceToQueryPrefix" value="false" />
     <property name="enableMemento" value="true" />
 
     <property name="replay" ref="archivalurlreplay" />
     <property name="collection" ref="localbdbcollection" />
-    <property name="exclusionFactory" ref="blacklist" />
-    <property name="replayPrefix" value="${wayback.url.prefix}/wayback/" />
-    <property name="queryPrefix" value="${wayback.url.prefix}/wayback/" />
-    <property name="staticPrefix" value="${wayback.url.prefix}/wayback/" />
+    <property name="exclusionFactory" ref="url-filters" />
+    <property name="replayPrefix" value="${wayback.url.prefix}/restricted/" />
+    <property name="queryPrefix" value="${wayback.url.prefix}/restricted/" />
+    <property name="staticPrefix" value="${wayback.url.prefix}/restricted/" />
     <property name="query">
       <bean class="org.archive.wayback.query.Renderer">
         <property name="captureJsp" value="/WEB-INF/query/BubbleCalendar.jsp" />
