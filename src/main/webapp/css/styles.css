@@ -1,15 +1,15 @@
-a:link			{ font-family: Arial, Helvetica, sans-serif; color: #3333FF; text-decoration: underline; line-height: normal} 
-a:visited		{ font-family: Arial, Helvetica, sans-serif; color: #993399; text-decoration: underline; line-height: normal} 
+a:link			{ font-family: Arial, Helvetica, sans-serif; color: #3333FF; text-decoration: underline; line-height: normal}
+a:visited		{ font-family: Arial, Helvetica, sans-serif; color: #993399; text-decoration: underline; line-height: normal}
 #nolinelink		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10px; color: #0000FF; line-height: normal; text-decoration: none}
-#orangelink		{ font-family: Arial, Helvetica, sans-serif; color: #CC6600; text-decoration: underline; line-height: normal} 
+#orangelink		{ font-family: Arial, Helvetica, sans-serif; color: #CC6600; text-decoration: underline; line-height: normal}
 #blacklink		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10px;color: #000000 }
 #whitelink		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10px;color: #FFFFFF }
 
 .mainSmall		{ font-family: Verdana, Helvetica, sans-serif; font-size: 11px; line-height: normal}
 .mainSmallG		{ font-family: Verdana, Helvetica, sans-serif; font-size: 11px; line-height: normal; color: #666666}
 .mainBodyR		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; color: #990000}
-.mainBodyW		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt; color: #FFFFFF} 
-.mainBody		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt} 
+.mainBodyW		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt; color: #FFFFFF}
+.mainBody		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt}
 .mainTitle		{ font-family: Arial, Helvetica, sans-serif; font-size: 14pt; font-style: normal; font-weight: bold}
 .mainTitleW		{ font-family: Arial, Helvetica, sans-serif; font-size: 14pt; color: #FFFFFF}
 .mainSearchTitle	{ font-family: Arial, Helvetica, sans-serif; font-size: 14pt; font-style: normal; color: #666666}
@@ -27,8 +27,8 @@ a:visited		{ font-family: Arial, Helvetica, sans-serif; color: #993399; text-dec
 
 .e2kSmall		{ font-family: Verdana, Helvetica, sans-serif; font-size: 11px; line-height: normal}
 .e2kBodyR		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; color: #990000}
-.e2kBodyW		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt; color: #FFFFFF} 
-.e2kBody		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt} 
+.e2kBodyW		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt; color: #FFFFFF}
+.e2kBody		{ font-family: Verdana, Helvetica, sans-serif; font-size: 10pt}
 .e2kTitle		{ font-family: Arial, Helvetica, sans-serif; font-size: 14pt; font-style: normal; font-weight: bold}
 .e2kCalendar		{ font-family: Arial, Helvetica, sans-serif; font-size: 14pt; font-style: normal; font-weight: bold}
 .e2kSecHead		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12pt; font-style: normal; font-weight: bold}
@@ -216,4 +216,34 @@ filter: alpha(opacity=20);
     top: 1px;
     left: 1px;
     cursor: pointer;
+}
+
+.chyba404 {
+    font-family: "Times New Roman", Times, serif;
+    margin: 40px 0 0 0;
+    background: #0000ff;
+    font-weight: normal;
+}
+
+.chyba404 div {
+    text-align: center;
+    color: white;
+    padding: 90px 0 120px 0;
+}
+
+.chyba404 span {
+    margin-top: 90px;
+    font-size: 60px;
+}
+
+.chyba404 p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  margin: 30px 0 0 0;
+}
+
+.chyba404 a {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  color: white;
 }
