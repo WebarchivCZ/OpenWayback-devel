@@ -18,7 +18,8 @@
         wayback.basedir.default=/opt/wayback-index
         wayback.url.scheme.default=http
         wayback.url.host.default=curator00.webarchiv.cz
-        wayback.url.port.default=8080
+        wayback.url.port.default=80
+	wayback.url.port.frontend=8080
 
         <!-- Environment variables (if present) override defaults. No need to customize these. -->
         wayback.basedir=#{ systemEnvironment['WAYBACK_BASEDIR'] ?: '${wayback.basedir.default}' }
@@ -27,8 +28,11 @@
         wayback.url.port=#{ systemEnvironment['WAYBACK_URL_PORT'] ?: '${wayback.url.port.default}' }
 
         <!-- No need to edit this setting unless deploying in a non-ROOT context
-             or using a load balancer, in which case configure it with the frontend URL prefix. -->
+             or using a load balancer, in which case configure it with the frontend URL prefix.
+	wayback.url.prefix.default=http://curator00.webarchiv.cz:8080
+-->
         wayback.url.prefix.default=${wayback.url.scheme}://${wayback.url.host}:${wayback.url.port}
+	wayback.url.prefix.frontend=${wayback.url.scheme}://${wayback.url.host}:${wayback.url.port.frontend}
 
         <!-- Environment variable (if present) overrides default. No need to customize this. -->
         wayback.url.prefix=#{ systemEnvironment['WAYBACK_URL_PREFIX'] ?: '${wayback.url.prefix.default}' }
@@ -177,9 +181,12 @@
   </bean>
 
   <bean name="standardaccesspoint" class="org.archive.wayback.webapp.AccessPoint">
+    <property name="accessPointPath" value="${wayback.url.prefix.frontend}/secure/"/>
+<!--
     <property name="accessPointPath" value="${wayback.url.prefix}/wayback/"/>
+-->
 	<!--<property name="exclusionFactory" ref="whitelist" />-->
-    <property name="internalPort" value="${wayback.url.port}"/>
+    <property name="internalPort" value="80"/>
     <property name="serveStatic" value="true" />
     <property name="bounceToReplayPrefix" value="false" />
     <property name="bounceToQueryPrefix" value="false" />
@@ -189,11 +196,15 @@
 	  These properties enable customized handling of query, replay, and static
 	  requests by different URL prefixes
 	-->
-	
+
+    <property name="replayPrefix" value="${wayback.url.prefix}/secure/" />
+    <property name="queryPrefix" value="${wayback.url.prefix}/secure/" />
+    <property name="staticPrefix" value="${wayback.url.prefix}/secure/" />
+<!--	
     <property name="replayPrefix" value="${wayback.url.prefix}/wayback/" />
     <property name="queryPrefix" value="${wayback.url.prefix}/wayback/" />
     <property name="staticPrefix" value="${wayback.url.prefix}/wayback/" />
-
+-->
 	<!--
 		The following property will cause only results matching the exact host
 		the user requested to be displayed. URLs matching other versions of the
@@ -225,7 +236,10 @@
 
     <property name="uriConverter">
       <bean class="org.archive.wayback.archivalurl.ArchivalUrlResultURIConverter">
+        <property name="replayURIPrefix" value="${wayback.url.prefix}/secure/"/>
+<!--
         <property name="replayURIPrefix" value="${wayback.url.prefix}/wayback/"/>
+-->
       </bean>
     </property>
 
@@ -246,7 +260,7 @@
   </bean>
 <!-- Webarchiv.cz | Testing restricted Access -->
   <bean name="restricted-access" class="org.archive.wayback.webapp.AccessPoint">
-    <property name="accessPointPath" value="${wayback.url.prefix}/restricted/"/>
+    <property name="accessPointPath" value="${wayback.url.prefix.frontend}/public/"/>
     <property name="internalPort" value="${wayback.url.port}"/>
     <property name="serveStatic" value="true" />
     <property name="bounceToReplayPrefix" value="false" />
@@ -256,9 +270,9 @@
     <property name="replay" ref="archivalurlreplay" />
     <property name="collection" ref="localbdbcollection" />
     <property name="exclusionFactory" ref="url-filters" />
-    <property name="replayPrefix" value="${wayback.url.prefix}/restricted/" />
-    <property name="queryPrefix" value="${wayback.url.prefix}/restricted/" />
-    <property name="staticPrefix" value="${wayback.url.prefix}/restricted/" />
+    <property name="replayPrefix" value="${wayback.url.prefix}/public/" />
+    <property name="queryPrefix" value="${wayback.url.prefix}/public/" />
+    <property name="staticPrefix" value="${wayback.url.prefix}/public/" />
     <property name="query">
       <bean class="org.archive.wayback.query.Renderer">
         <property name="captureJsp" value="/WEB-INF/query/BubbleCalendar.jsp" />
@@ -266,7 +280,7 @@
     </property>
     <property name="uriConverter">
       <bean class="org.archive.wayback.archivalurl.ArchivalUrlResultURIConverter">
-        <property name="replayURIPrefix" value="${wayback.url.prefix}/restricted/"/>
+        <property name="replayURIPrefix" value="${wayback.url.prefix}/public/"/>
       </bean>
     </property>
     <property name="parser">
@@ -294,6 +308,7 @@
          will prefer the HTML interface. 
  -->
 
+<!--
   <bean name="opensearchaccesspoint" parent="standardaccesspoint">
     <property name="accessPointPath" value="${wayback.url.prefix}/opensearch/"/>
     <property name="internalPort" value="${wayback.url.port}"/>
@@ -311,7 +326,7 @@
       </bean>
     </property>
   </bean>
-
+-->
 
 <!--
     The following AccessPoint inherits all configuration from the standardaccesspoint
