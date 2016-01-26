@@ -63,7 +63,7 @@ int secs = 5;
             </div>
             </section> -->
 
-						<section style="chyba404">
+						<section>
             <div>
 	<script type="text/javascript">
 		function go() {
@@ -72,11 +72,12 @@ int secs = 5;
 		window.setTimeout("go()",<%= secs * 1000 %>);
 	</script>
 
-		<span><%= fmt.format("UIGlobal.loading") %></span>
+		<section class="chyba404"><div><span><%= fmt.format("UIGlobal.loading") %></span>
 		<p><%= safeSource %> | <%= prettyDate %></p>
 		<p><%= fmt.format("UrlRedirectNotice.302response") %></p>
 		<p><%= fmt.format("UrlRedirectNotice.redirect") %></p>
 		<p><%= safeTarget %></p>
+		</div></section>
       <!--  <p class="impatient"><a href="<%= safeTargetReplayUrl %>"><%= fmt.format("UIGlobal.impatient") %></a></p> -->
             </div>
             </section>
