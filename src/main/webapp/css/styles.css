@@ -247,3 +247,20 @@ filter: alpha(opacity=20);
   font-size: 16px;
   color: white;
 }
+
+.help {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+	margin: 0 10px 10px 10px;
+}
+
+.help p {
+ font-family: "Times New Roman", Times, serif;
+ font-size: 16px;
+}
+
+.help a {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  color: blue;
+}
