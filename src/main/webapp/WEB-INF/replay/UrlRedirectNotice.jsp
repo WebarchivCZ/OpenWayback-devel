@@ -73,12 +73,11 @@ int secs = 5;
 	</script>
 
 		<section class="chyba404"><div><span><%= fmt.format("UIGlobal.loading") %></span>
-		<p><%= safeSource %> | <%= prettyDate %></p>
-		<p><%= fmt.format("UrlRedirectNotice.302response") %></p>
-		<p><%= fmt.format("UrlRedirectNotice.redirect") %></p>
-		<p><%= safeTarget %></p>
+		<p><%= safeSource %> v. <%= prettyDate %> <%= fmt.format("UrlRedirectNotice.302response") %></p>
+	<!--	<p><%= fmt.format("UrlRedirectNotice.redirect") %></p> -->
+		<!-- <p><%= safeTarget %></p> -->
 		</div></section>
-      <!--  <p class="impatient"><a href="<%= safeTargetReplayUrl %>"><%= fmt.format("UIGlobal.impatient") %></a></p> -->
+    <p class="impatient"><a href="<%= safeTargetReplayUrl %>"><%= fmt.format("UIGlobal.impatient") %></a></p>
             </div>
             </section>
             <div id="errorBorder"></div>
